@@ -27,7 +27,7 @@ python3 shp2postgis.py --help
 
 > Para usar como biblioteca
 
-> To use as library
+> To use as a library
 
 ```python
 from Shps2Postgis import Shps2Postgis
