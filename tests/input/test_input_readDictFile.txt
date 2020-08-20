@@ -1,0 +1,4 @@
+airport=aerodromo
+airspace=espaco_aereo
+waypoint
+#runway=pista
