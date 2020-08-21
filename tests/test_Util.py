@@ -1,5 +1,5 @@
 import unittest
-from Util import *
+from classes.Util import *
 
 class verificaUtil(unittest.TestCase):
 

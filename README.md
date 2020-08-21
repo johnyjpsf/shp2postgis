@@ -30,7 +30,7 @@ python3 shp2postgis.py --help
 > To use as a library
 
 ```python
-from shps2postgis import Shps2Postgis
+from shps2postgis.classes import Shps2Postgis
 
 process = Shps2Postgis(dictInput, outputPath, schema, encoding, srid, verbose)
 
