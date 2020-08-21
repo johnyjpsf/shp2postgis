@@ -1,6 +1,6 @@
 import sys, getopt
-from shp2postgis import Util
-from shp2postgis import Shp2Postgis
+from Util import *
+from Shp2Postgis import Shp2Postgis
 
 def main():
     help_ptbr =  "Uso: shp2sql [OPÇÃO]... --ifile=ARQUIVO \n"
@@ -83,7 +83,7 @@ def main():
         print("Parâmetro --ifile obrigatório. Veja o uso da ferramenta executando 'python3 shp2sql.py -h'")
         sys.exit(2)
 
-    lista = Util.readDictFile(fileName=inputFile, commentChar="#", separationChar="=")
+    lista = readDictFile(fileName=inputFile, commentChar="#", separationChar="=")
     batchProcess = Shp2Postgis(dictInput=lista, outputPath=outputDir, schema=schema, encoding=encoding, srid=srid, verbose=verbose)
     batchProcess.run()
 

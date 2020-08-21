@@ -1,5 +1,6 @@
-from shp2postgis.Data2Sql import Data2Sql
-from shp2postgis.ShapeFileReader import ShapeFileReader
+from Data2Sql import Data2Sql
+from ShapeFileReader import ShapeFileReader
+from Util import *
 
 class Shp2Postgis:
     """
@@ -44,6 +45,6 @@ class Shp2Postgis:
             if not layer.load():
                 continue
             converter = Data2Sql(schema=self.schema, table=layerName, fields=layer.getFields(), data=layer.getData())
-            Util.listWriter(converter.getDropTable(), converter.getCreateTable(), converter.getInserts(), fileName=self.outputPath + layerName, fileExtension="sql",separator=None)
+            listWriter(converter.getDropTable(), converter.getCreateTable(), converter.getInserts(), fileName=self.outputPath + layerName, fileExtension="sql",separator=None)
         if self.verbose:
             print("processo terminado!")
