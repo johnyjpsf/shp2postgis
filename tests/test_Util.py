@@ -1,5 +1,5 @@
 import unittest
-from classes.Util import *
+from shp2postgis.Util import *
 
 class verificaUtil(unittest.TestCase):
 
