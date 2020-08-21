@@ -1,6 +1,6 @@
 import sys, getopt
-from Util import *
-from Shp2Postgis import Shp2Postgis
+from shp2postgis.Util import *
+from shp2postgis.Shp2Postgis import Shp2Postgis
 
 def main():
     help_ptbr =  "Uso: shp2sql [OPÇÃO]... --ifile=ARQUIVO \n"

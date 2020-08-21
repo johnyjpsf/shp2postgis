@@ -1,6 +1,6 @@
-from Data2Sql import Data2Sql
-from ShapeFileReader import ShapeFileReader
-from Util import *
+from shp2postgis.Data2Sql import Data2Sql
+from shp2postgis.ShapeFileReader import ShapeFileReader
+from shp2postgis.Util import *
 
 class Shp2Postgis:
     """
