@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="johnyjpsf",
+    name="shp2postgis",
     version="0.0.1",
     author="Johny Patrick da Silva Ferreira",
     author_email="johnypatrick5@gmail.com",
