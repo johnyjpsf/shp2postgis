@@ -59,10 +59,15 @@ class Data2Sql:
                     text = "NULL"
                 else:
                     if self.fields.setdefault(attr, "M") == 'C' or self.fields.setdefault(attr, "M") == 'D':
-                        text = str(fea[attr]).replace('\x00','').replace("'","\\" + "'")
-                        text = "'" + text + "'"
-                        if text == "''":
-                            text = "NULL"
+                        if type(fea[attr]) == bytes:
+                            text = fea[attr].decode()
+                            if text == '':
+                                text = 'NULL'
+                        else:
+                            text = str(fea[attr]).replace('\x00','').replace("'","\\" + "'")
+                            text = "'" + text + "'"
+                            if text == "''":
+                                text = "NULL"
                     elif self.fields.setdefault(attr, "M") == 'M':
                         break
                     else:
