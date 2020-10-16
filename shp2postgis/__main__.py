@@ -8,6 +8,9 @@ def main():
     help_ptbr += "Converte os ARQUIVO(s) shapefile em SQL do PostgreSql com Postgis."
     help_ptbr += " Como o shapefile é um conjunto de arquivos não é necessário usar a extensão após o nome.\n"
     help_ptbr += "  -h, --help              Exibe este texto de ajuda.\n"
+    help_ptbr += "  -H, --help_en           Exibe texto de ajuda em inglês( show help text in english ).\n"
+    help_ptbr += "  -v, --verbose           Exibe informações adicionais ao executar a conversão.\n"
+    help_ptbr += "  -V, --version           Exibe versão do programa.\n"
     help_ptbr += "  -i, --ifil=ARQUIVO      Arquivo de entrada com a lista de camadas e shapefiles.\n"
     help_ptbr += "                          Cada linha deve estar no formato <camada>=<path/shapeName>.\n"
     help_ptbr += "                          Uma linha pode ser comentada usando o caracter '#'.\n"
@@ -27,7 +30,10 @@ def main():
     help_en += "   or: shp2sql [OPTION]... -i FILE \n"
     help_en += "Converts shapefile FILE(s) in SQL PostgreSql/Postgis."
     help_en += " Shapefile is a set of files, so do not use extension after file name.\n"
-    help_en += "  -h, --help              Show this help text.\n"
+    help_en += "  -H, --help_en           Show this help text.\n"
+    help_en += "  -h, --help              Show this help text (in potuguese).\n"
+    help_en += "  -v, --verbose           Show extra information during execution.\n"
+    help_en += "  -V, --version           Show version.\n"
     help_en += "  -i, --ifil=FILE         Input file as a list of layers and shapefiles.\n"
     help_en += "                          Each line must be formated as <layer>=<path/shapeName>.\n"
     help_en += "                          Lines can be commented using '#' in the begin os the line.\n"
@@ -49,9 +55,10 @@ def main():
     srid = None
     encoding = None
     verbose = None
+    version = '0.1.3'
 
     try:
-      opts, args = getopt.getopt(sys.argv[1:],"hHvi:o:s:c:e:",["help","help_en","ifile=","odir=","schema=","srid=","encoding=","verbose"])
+      opts, args = getopt.getopt(sys.argv[1:],"hHvi:o:s:c:e:V",["help","help_en","ifile=","odir=","schema=","srid=","encoding=","verbose","version"])
     except getopt.GetoptError:
       print("Veja o uso da ferramenta executando 'python3 shp2sql.py -h'")
       sys.exit(2)
@@ -62,6 +69,9 @@ def main():
             sys.exit(2)
         elif opt in ("-H", "--help_en"):
             print(help_en)
+            sys.exit(2)
+        elif opt in ("-V", "--version"):
+            print(version)
             sys.exit(2)
         elif opt in ("-i", "--ifile"):
             inputFile = arg
