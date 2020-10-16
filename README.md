@@ -25,14 +25,69 @@ ou / or
 python3 shp2postgis.py --help
 ```
 
-> Para usar como biblioteca
-
-> To use as a library
+### Para usar como biblioteca / as a library
 
 ```python
-from shps2postgis import Shps2Postgis
+from shp2postgis.Shp2Postgis import Shp2Postgis
 
 process = Shps2Postgis(dictInput, outputPath, schema, encoding, srid, verbose)
 
 process.run()
+```
+
+#### Parâmetros / parameters
+* >dictInput:
+>>dicionário python em que cada item tem chave sendo o nome da camada e valor sendo o caminho para o arquivo shapefile
+>
+>> python dictionary in which each item has a key being the layer name and value being the path to the shapefile
+>
+>```json
+dictInput = {
+    "airport": "/home/user/SHP/AIRPORT",
+}
+```
+
+* >outputPath:
+>>diretório onde será gravado o arquivo sql.
+>
+>>folder where the sql file will be saved.
+>
+>```python
+outputPath = "/home/user/SQL/"
+```
+
+* >schema:
+>>schema do banco de dados em que o sql será carregado.
+>
+>>database schema where sql file will be loaded.
+>
+>```python
+schema = "public"
+```
+
+* >encoding:
+>>conjunto de caracteres do shapefile.
+>
+>>charset of the shapefile.
+>
+>```python
+encoding = "latin1"
+```
+
+* >srid:
+>>conjunto de caracteres do shapefile.
+>
+>>charset of the shapefile.
+>
+>```python
+encoding = "latin1"
+```
+
+* >verbose:
+>>deixe com valor False.
+>
+>>leave False.
+>
+>```python
+verbose = False
 ```
