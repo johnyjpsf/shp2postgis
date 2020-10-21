@@ -49,9 +49,10 @@ def main():
     srid = None
     encoding = None
     verbose = None
+    log = None
 
     try:
-      opts, args = getopt.getopt(sys.argv[1:],"hHvi:o:s:c:e:",["help","help_en","ifile=","odir=","schema=","srid=","encoding=","verbose"])
+      opts, args = getopt.getopt(sys.argv[1:],"lhHvi:o:s:c:e:",["log","help","help_en","ifile=","odir=","schema=","srid=","encoding=","verbose"])
     except getopt.GetoptError:
       print("Veja o uso da ferramenta executando 'python3 shp2sql.py -h'")
       sys.exit(2)
@@ -75,6 +76,8 @@ def main():
             encoding = arg
         elif opt in ("-v", "--verbose"):
             verbose = True
+        elif opt in ("-l", "--log"):
+            log = True
         else:
             print("Parâmetro não esperado. Veja o uso da ferramenta executando 'python3 shp2sql.py -h'")
             sys.exit(2)
@@ -84,7 +87,7 @@ def main():
         sys.exit(2)
 
     lista = readDictFile(fileName=inputFile, commentChar="#", separationChar="=")
-    batchProcess = Shp2Postgis(dictInput=lista, outputPath=outputDir, schema=schema, encoding=encoding, srid=srid, verbose=verbose)
+    batchProcess = Shp2Postgis(dictInput=lista, outputPath=outputDir, schema=schema, encoding=encoding, srid=srid, verbose=verbose, log=log)
     batchProcess.run()
 
     sys.exit(0)

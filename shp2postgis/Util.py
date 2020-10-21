@@ -1,3 +1,5 @@
+import datetime
+
 """
 # *args: multiple arguments, writable things or lists of writable things
 """
@@ -59,3 +61,8 @@ def readDictFile(fileName, commentChar="#", separationChar="="):
                 lines[sep[0]] = sep[0]
     f.close()
     return lines
+
+def log(string, path):
+    f = open(path, 'at')
+    f.write("(" + str(datetime.datetime.now()) + "): " + string + "\n")
+    f.close()

@@ -6,11 +6,13 @@ class Shp2Postgis:
     """
     # dictInput: dictionary as {"layerName": "path/shapeFileName", ....}
     """
-    def __init__(self, dictInput, outputPath="./", schema="public", encoding="latin1", srid=4326, verbose=False):
+    def __init__(self, dictInput, outputPath="./", schema="public", encoding="latin1", srid=4326, verbose=False, log=False):
         self.dictInput = dictInput
         if outputPath == None:
             self.outputPath = "./"
         else:
+            if outputPath[-1] != '/':
+                outputPath = outputPath + '/'
             self.outputPath = outputPath
         if schema == None:
             self.schema = "public"
@@ -25,11 +27,18 @@ class Shp2Postgis:
         else:
             self.srid = srid
         if verbose == None:
-            self.verbose = verbose
+            self.verbose = False
         else:
             self.verbose = verbose
+        if log == None:
+            self.log = False
+        else:
+            self.log = log
 
     def run(self):
+        if type(self.dictInput) != dict:
+            print('input dictionary not valid')
+            exit(1)
         for layerName in self.dictInput:
             shapeFileName = self.dictInput[layerName]
             if self.verbose:
@@ -44,7 +53,9 @@ class Shp2Postgis:
             layer = ShapeFileReader(shapeFileName, encoding=self.encoding, srid=self.srid)
             if not layer.load():
                 continue
-            converter = Data2Sql(schema=self.schema, table=layerName, fields=layer.getFields(), data=layer.getData())
+            converter = Data2Sql(schema=self.schema, table=layerName, fields=layer.getFields(), data=layer.getData(), log=self.log, logOutputPath=self.outputPath + 'shp2postgis_log_' + layerName + '.txt')
             listWriter(converter.getDropTable(), converter.getCreateTable(), converter.getInserts(), fileName=self.outputPath + layerName, fileExtension="sql",separator=None)
+            if self.log:
+                log(layerName + " imported.\n", self.outputPath + 'shp2postgis_log_' + layerName + '.txt')
         if self.verbose:
             print("processo terminado!")
