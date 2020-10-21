@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="shp2postgis",
-    version="0.1.7",
+    version="0.1.8",
     author="Johny Patrick da Silva Ferreira",
     author_email="johnypatrick5@gmail.com",
     description="shapefile to sql converter.",
