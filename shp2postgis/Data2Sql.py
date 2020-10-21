@@ -1,4 +1,4 @@
-import shp2postgis.Util
+from shp2postgis.Util import *
 
 class Data2Sql:
     """
@@ -104,7 +104,7 @@ class Data2Sql:
                                 if key in text:
                                     if self.log:
                                         logText = '[' + key + '] found in line ' + str(index) + ', replaced by [' + self.replacedChars[key] + '].'
-                                        Util.log(logText, self.logOutputPath)
+                                        log(logText, self.logOutputPath)
                                     text = text.replace(key, self.replacedChars[key])
                             text = "'" + text + "'"
                             if text == "''":
