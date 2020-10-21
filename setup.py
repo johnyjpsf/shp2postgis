@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="shp2postgis",
-    version="0.1.5",
+    version="0.1.7",
     author="Johny Patrick da Silva Ferreira",
     author_email="johnypatrick5@gmail.com",
     description="shapefile to sql converter.",
@@ -25,3 +25,15 @@ setuptools.setup(
     ],
     python_requires='>=3.6'
 )
+
+# para empacotar
+# python3 setup.py sdist bdist_wheel
+
+# para fazer upload
+# python3 -m twine upload --repository testpypi dist/*
+
+# para desinstalar o pacote antigo
+# pip3 uninstall shp2postgis
+
+# para instalar o pacote
+# pip3 install --index-url https://test.pypi.org/simple/ shp2postgis
