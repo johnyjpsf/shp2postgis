@@ -1,4 +1,4 @@
-import Util
+import shp2postgis.Util
 
 class Data2Sql:
     """
