@@ -119,7 +119,7 @@ class Data2Sql:
                 geometry = 'NULL'
                 if self.log:
                     logText = 'geometry NULL found in line ' + str(index) + '.'
-                    Util.log(logText, self.logOutputPath)
+                    log(logText, self.logOutputPath)
             else:
                 geometry = "ST_GeomFromText('" + WktShapeFileGeometry + "', " + WktShapeFileGeometrySrid + ")"
             quotedFields = []
