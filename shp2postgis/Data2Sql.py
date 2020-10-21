@@ -63,7 +63,7 @@ class Data2Sql:
             "M": "VARCHAR"
         }
 
-        sqlString = "CREATE TABLE \"{sch}\".\"{tab}\" (\"gid\" SERIAL, CONSTRAINT \"{tab}_pk\" PRIMARY KEY (\"gid\"));\n".format(sch=self.schema, tab=self.table)
+        sqlString = "CREATE TABLE IF EXISTS \"{sch}\".\"{tab}\" (\"gid\" SERIAL, CONSTRAINT \"{tab}_pk\" PRIMARY KEY (\"gid\"));\n".format(sch=self.schema, tab=self.table)
         if self.getSrid() :
             sqlString += "SELECT AddGeometryColumn(\'{sch}\',\'{tab}\',\'geom\',{srid},\'{typ}\',2);\n".format(sch=self.schema, tab=self.table, srid=self.getSrid(), typ=self.getGeomType())
         else:
