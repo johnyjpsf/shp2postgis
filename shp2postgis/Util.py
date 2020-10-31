@@ -3,13 +3,13 @@ import datetime
 """
 # *args: multiple arguments, writable things or lists of writable things
 """
-def listWriter(*args, fileName="file", fileExtension="txt", separator="-", commentChar="--"):
+def listWriter(*args, fileName="file", fileExtension="txt", separator="-", commentChar="--", mode='wt'):
     separationString = ""
     if separator != None and separator != "":
         separationString = "\n" + commentChar + " "
         for value in range(10):
             separationString += separator
-    f = open(fileName + "." + fileExtension, "wt")
+    f = open(fileName + "." + fileExtension, mode)
     index = 0
     for value in args:
         if type(value) is list:

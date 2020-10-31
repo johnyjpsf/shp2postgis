@@ -1,12 +1,13 @@
 from shp2postgis.Data2Sql import Data2Sql
-from shp2postgis.ShapeFileReader import ShapeFileReader
 from shp2postgis.Util import *
+# from Data2Sql import Data2Sql
+# from Util import *
 
 class Shp2Postgis:
     """
     # dictInput: dictionary as {"layerName": "path/shapeFileName", ....}
     """
-    def __init__(self, dictInput, outputPath="./", schema="public", encoding="latin1", srid=4326, verbose=False, log=False):
+    def __init__(self, dictInput, outputPath="./", schema="public", encoding="latin1", verbose=False, log=False):
         self.dictInput = dictInput
         if outputPath == None:
             self.outputPath = "./"
@@ -22,10 +23,6 @@ class Shp2Postgis:
             self.encoding = "latin1"
         else:
             self.encoding = encoding
-        if srid == None:
-            self.srid = 4326
-        else:
-            self.srid = srid
         if verbose == None:
             self.verbose = False
         else:
@@ -37,7 +34,7 @@ class Shp2Postgis:
 
     def run(self):
         if type(self.dictInput) != dict:
-            print('input dictionary not valid')
+            print('dicionário de input inválido')
             exit(1)
         for layerName in self.dictInput:
             shapeFileName = self.dictInput[layerName]
@@ -47,15 +44,11 @@ class Shp2Postgis:
                 f = open(shapeFileName + ".shp","r")
                 f.close()
             except Exception as e:
+                print(shapeFileName + ".shp não existe")
                 if self.verbose:
-                    print(shapeFileName + ".shp não existe")
+                    print(e)
                 continue
-            layer = ShapeFileReader(shapeFileName, encoding=self.encoding, srid=self.srid)
-            if not layer.load():
-                continue
-            converter = Data2Sql(schema=self.schema, table=layerName, fields=layer.getFields(), data=layer.getData(), log=self.log, logOutputPath=self.outputPath + 'shp2postgis_log_' + layerName + '.txt')
-            listWriter(converter.getDropTable(), converter.getCreateTable(), converter.getInserts(), fileName=self.outputPath + layerName, fileExtension="sql",separator=None)
-            if self.log:
-                log(layerName + " imported.\n", self.outputPath + 'shp2postgis_log_' + layerName + '.txt')
+            shapeReader = Data2Sql(tableName=layerName, schema=self.schema, encoding=self.encoding, file=shapeFileName + ".shp")
+            shapeReader.writeSqlFile(fileName=self.outputPath + layerName)
         if self.verbose:
             print("processo terminado!")

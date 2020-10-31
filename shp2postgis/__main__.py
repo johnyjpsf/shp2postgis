@@ -1,6 +1,8 @@
 import sys, getopt
 from shp2postgis.Util import *
 from shp2postgis.Shp2Postgis import Shp2Postgis
+# from Util import *
+# from Shp2Postgis import Shp2Postgis
 
 def main():
     help_ptbr =  "Uso: shp2sql [OPÇÃO]... --ifile=ARQUIVO \n"
@@ -87,7 +89,7 @@ def main():
         sys.exit(2)
 
     lista = readDictFile(fileName=inputFile, commentChar="#", separationChar="=")
-    batchProcess = Shp2Postgis(dictInput=lista, outputPath=outputDir, schema=schema, encoding=encoding, srid=srid, verbose=verbose, log=log)
+    batchProcess = Shp2Postgis(dictInput=lista, outputPath=outputDir, schema=schema, encoding=encoding, verbose=verbose, log=log)
     batchProcess.run()
 
     sys.exit(0)
