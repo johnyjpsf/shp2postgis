@@ -35,12 +35,12 @@ class Data2Sql:
         return self.fields
 
     def translateShape(self, shape):
-        text = "ST_GeomFromGeoJSON('"
+        text = "ST_SetSRID(ST_GeomFromGeoJSON('"
         if shape.shapeTypeName == 'NULL':
             text = 'NULL'
         else:
             geojson = str(shape.__geo_interface__)
-            text = text + geojson.replace('(','[').replace(')',']').replace("'",'"') + "')"
+            text = text + geojson.replace('(','[').replace(')',']').replace("'",'"') + "')," + self.getSrid() + ")"
         return text
 
     def getSrid(self):
