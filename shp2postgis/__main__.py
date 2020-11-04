@@ -5,7 +5,7 @@ from shp2postgis.Shp2Postgis import Shp2Postgis
 # from Shp2Postgis import Shp2Postgis
 
 def main():
-    version = "0.2.0"
+    version = "0.2.1"
 
     help_ptbr =  "shp2sql versão " + version + "\n"
     help_ptbr += "Uso: shp2sql [OPÇÃO]... --ifile=ARQUIVO \n"
