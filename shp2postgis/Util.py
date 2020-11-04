@@ -1,7 +1,7 @@
 import datetime
 
 def getVersion():
-    return "0.2.3"
+    return "0.2.4"
 
 """
 # *args: multiple arguments, writable things or lists of writable things
