@@ -24,7 +24,7 @@ def main():
     help_ptbr += "                          padrão: 'latin1'\n"
     help_ptbr += "Exemplos:\n"
     help_ptbr += "  python3 shp2sql.py -i ./shapes.txt \n"
-    help_ptbr += "  python3 shp2sql.py --ifile=./shapes.txt --schema=\"ais\" --odir=./saida/"
+    help_ptbr += "  python3 shp2sql.py --ifile=./shapes.txt --schema=\"ais\" --odir=./saida/\n"
     help_ptbr += "Obs:\n"
     help_ptbr += "  SRID padrão 4326\n"
 
@@ -47,7 +47,7 @@ def main():
     help_en += "                          default: 'latin1'\n"
     help_en += "Examples:\n"
     help_en += "  python3 shp2sql.py -i ./shapes.txt \n"
-    help_en += "  python3 shp2sql.py --ifile=./shapes.txt --schema=\"ais\" --odir=./output/"
+    help_en += "  python3 shp2sql.py --ifile=./shapes.txt --schema=\"ais\" --odir=./output/\n"
     help_en += "Remarks:\n"
     help_en += "  default SRID 4326\n"
 
