@@ -18,11 +18,11 @@ pip3 install -r requirements.txt
 > Details about use are shown using:
 
 ```bash
-python3 shp2postgis.py -h
+python3 -m shp2postgis -h
 ```
 ou / or
 ```bash
-python3 shp2postgis.py --help
+python3 -m shp2postgis --help
 ```
 
 ### Para usar como biblioteca / as a library

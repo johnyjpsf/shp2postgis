@@ -58,11 +58,12 @@ def main():
     encoding = None
     verbose = None
     log = None
+    errorMessage = "Veja o uso da ferramenta executando 'python3 -m shp2postgis -h'"
 
     try:
       opts, args = getopt.getopt(sys.argv[1:],"lhHvi:o:s:e:V",["log","help","help_en","ifile=","odir=","schema=","encoding=","verbose","version"])
     except getopt.GetoptError:
-      print("Veja o uso da ferramenta executando 'python3 shp2sql.py -h'")
+      print(errorMessage)
       sys.exit(2)
 
     for opt, arg in opts:
@@ -88,11 +89,11 @@ def main():
         elif opt in ("-l", "--log"):
             log = True
         else:
-            print("Parâmetro não esperado. Veja o uso da ferramenta executando 'python3 shp2sql.py -h'")
+            print("Parâmetro não esperado. " + errorMessage)
             sys.exit(2)
 
     if inputFile == None:
-        print("Parâmetro --ifile obrigatório. Veja o uso da ferramenta executando 'python3 shp2sql.py -h'")
+        print("Parâmetro --ifile obrigatório. " + errorMessage)
         sys.exit(2)
 
     lista = readDictFile(fileName=inputFile, commentChar="#", separationChar="=")
