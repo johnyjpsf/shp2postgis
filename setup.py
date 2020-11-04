@@ -1,11 +1,12 @@
 import setuptools
+from shp2postgis.Util import *
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="shp2postgis",
-    version="0.1.3",
+    version=getVersion(),
     author="Johny Patrick da Silva Ferreira",
     author_email="johnypatrick5@gmail.com",
     description="shapefile to sql converter.",
@@ -25,3 +26,18 @@ setuptools.setup(
     ],
     python_requires='>=3.6'
 )
+
+# apagar build antigo
+# rm -r build && rm -r dist && rm -r shp2postgis.egg-info/
+
+# empacotar
+# python3 setup.py sdist bdist_wheel
+
+# fazer upload
+# python3 -m twine upload --repository testpypi dist/*
+
+# desinstalar o pacote antigo
+# pip3 uninstall shp2postgis -y
+
+# instalar o pacote
+# pip3 install --index-url https://test.pypi.org/simple/ shp2postgis

@@ -30,7 +30,7 @@ python3 shp2postgis.py --help
 ```python
 from shp2postgis.Shp2Postgis import Shp2Postgis
 
-process = Shps2Postgis(dictInput, outputPath, schema, encoding, srid, verbose)
+process = Shps2Postgis(dictInput, outputPath, schema, encoding, verbose)
 
 process.run()
 ```
@@ -66,15 +66,6 @@ schema = "public"
 ```
 
 * >encoding:
->>conjunto de caracteres do shapefile.
->
->>charset of the shapefile.
->
->```python
-encoding = "latin1"
-```
-
-* >srid:
 >>conjunto de caracteres do shapefile.
 >
 >>charset of the shapefile.
