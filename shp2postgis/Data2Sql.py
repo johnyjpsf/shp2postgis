@@ -44,7 +44,7 @@ class Data2Sql:
         return text
 
     def getSrid(self):
-        return 4326
+        return '4326'
 
     def getGeomType(self):
         return 'GEOMETRY'
