@@ -39,5 +39,5 @@ setuptools.setup(
 # desinstalar o pacote antigo
 # pip3 uninstall shp2postgis -y
 
-# instalar o pacote 
+# instalar o pacote
 # pip3 install --index-url https://test.pypi.org/simple/ shp2postgis
