@@ -5,7 +5,10 @@ from shp2postgis.Shp2Postgis import Shp2Postgis
 # from Shp2Postgis import Shp2Postgis
 
 def main():
-    help_ptbr =  "Uso: shp2sql [OPÇÃO]... --ifile=ARQUIVO \n"
+    version = "0.2.0"
+
+    help_ptbr =  "shp2sql versão " + version + "\n"
+    help_ptbr += "Uso: shp2sql [OPÇÃO]... --ifile=ARQUIVO \n"
     help_ptbr += " ou: shp2sql [OPÇÃO]... -i ARQUIVO \n"
     help_ptbr += "Converte os ARQUIVO(s) shapefile em SQL do PostgreSql com Postgis."
     help_ptbr += " Como o shapefile é um conjunto de arquivos não é necessário usar a extensão após o nome.\n"
@@ -25,7 +28,8 @@ def main():
     help_ptbr += "  python3 shp2sql.py -i ./shapes.txt \n"
     help_ptbr += "  python3 shp2sql.py --ifile=./shapes.txt --schema=\"ais\" --odir=./saida/"
 
-    help_en =  "Usage: shp2sql [OPTION]... --ifile=FILE \n"
+    help_en =  "shp2sql version " + version + "\n"
+    help_en += "Usage: shp2sql [OPTION]... --ifile=FILE \n"
     help_en += "   or: shp2sql [OPTION]... -i FILE \n"
     help_en += "Converts shapefile FILE(s) in SQL PostgreSql/Postgis."
     help_en += " Shapefile is a set of files, so do not use extension after file name.\n"

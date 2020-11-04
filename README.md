@@ -32,7 +32,7 @@ python3 shp2postgis.py --help
 ```python
 from shps2postgis import Shps2Postgis
 
-process = Shps2Postgis(dictInput, outputPath, schema, encoding, srid, verbose)
+process = Shps2Postgis(dictInput, outputPath, schema, encoding, verbose)
 
 process.run()
 ```
