@@ -30,7 +30,7 @@ python3 -m shp2postgis --help
 ```python
 from shp2postgis.Shp2Postgis import Shp2Postgis
 
-process = Shps2Postgis(dictInput, outputPath, schema, encoding, verbose)
+process = Shps2Postgis(dictInput, outputPath, schema, encoding, verbose, columnsToLower)
 
 process.run()
 ```
@@ -81,4 +81,13 @@ encoding = "latin1"
 >
 >```python
 verbose = False
+```
+
+* >columnsToLower:
+>>Faz com que os nomes das colunas fiquem em letra minúscula.
+>
+>>It makes the name of each column to be lower case.
+>
+>```python
+columnsToLower = True
 ```
