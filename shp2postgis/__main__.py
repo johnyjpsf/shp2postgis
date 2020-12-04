@@ -11,6 +11,7 @@ def main():
     help_ptbr += " Como o shapefile é um conjunto de arquivos não é necessário usar a extensão após o nome.\n"
     help_ptbr += "  -h, --help              Exibe este texto de ajuda.\n"
     help_ptbr += "  -H, --help_en           Exibe texto de ajuda em inglês( show help text in english ).\n"
+    help_ptbr += "  -l, --lower             Faz com que os nomes das colunas criadas fiquem em minúsculo.\n"
     help_ptbr += "  -v, --verbose           Exibe informações adicionais ao executar a conversão.\n"
     help_ptbr += "  -V, --version           Exibe versão do programa.\n"
     help_ptbr += "  -i, --ifil=ARQUIVO      Arquivo de entrada com a lista de camadas e shapefiles.\n"
@@ -34,6 +35,7 @@ def main():
     help_en += " Shapefile is a set of files, so do not use extension after file name.\n"
     help_en += "  -H, --help_en           Show this help text.\n"
     help_en += "  -h, --help              Show this help text (in potuguese).\n"
+    help_en += "  -l, --lower             Write column names in lower case.\n"
     help_en += "  -v, --verbose           Show extra information during execution.\n"
     help_en += "  -V, --version           Show version.\n"
     help_en += "  -i, --ifil=FILE         Input file as a list of layers and shapefiles.\n"
@@ -56,12 +58,13 @@ def main():
     schema = None
     srid = None
     encoding = None
+    lower = None
     verbose = None
     log = None
     errorMessage = "Veja o uso da ferramenta executando 'python3 -m shp2postgis -h'"
 
     try:
-      opts, args = getopt.getopt(sys.argv[1:],"lhHvi:o:s:e:V",["log","help","help_en","ifile=","odir=","schema=","encoding=","verbose","version"])
+      opts, args = getopt.getopt(sys.argv[1:],"LhHvli:o:s:e:V",["log","help","help_en","ifile=","odir=","schema=","encoding=","verbose","lower","version"])
     except getopt.GetoptError:
       print(errorMessage)
       sys.exit(2)
@@ -86,7 +89,9 @@ def main():
             encoding = arg
         elif opt in ("-v", "--verbose"):
             verbose = True
-        elif opt in ("-l", "--log"):
+        elif opt in ("-l", "--lower"):
+            lower = True
+        elif opt in ("-L", "--log"):
             log = True
         else:
             print("Parâmetro não esperado. " + errorMessage)
@@ -97,7 +102,7 @@ def main():
         sys.exit(2)
 
     lista = readDictFile(fileName=inputFile, commentChar="#", separationChar="=")
-    batchProcess = Shp2Postgis(dictInput=lista, outputPath=outputDir, schema=schema, encoding=encoding, verbose=verbose, log=log)
+    batchProcess = Shp2Postgis(dictInput=lista, outputPath=outputDir, schema=schema, encoding=encoding, verbose=verbose, log=log, columnsToLower=lower)
     batchProcess.run()
 
     sys.exit(0)

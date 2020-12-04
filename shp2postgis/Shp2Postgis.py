@@ -7,7 +7,7 @@ class Shp2Postgis:
     """
     # dictInput: dictionary as {"layerName": "path/shapeFileName", ....}
     """
-    def __init__(self, dictInput, outputPath="./", schema="public", encoding="latin1", verbose=False, log=False):
+    def __init__(self, dictInput, outputPath="./", schema="public", encoding="latin1", verbose=False, log=False, columnsToLower=False):
         self.dictInput = dictInput
         if outputPath == None:
             self.outputPath = "./"
@@ -31,6 +31,10 @@ class Shp2Postgis:
             self.log = False
         else:
             self.log = log
+        if columnsToLower == None:
+            self.columnsToLower = False
+        else:
+            self.columnsToLower = columnsToLower
 
     def run(self):
         if type(self.dictInput) != dict:
@@ -49,6 +53,6 @@ class Shp2Postgis:
                     print(e)
                 continue
             shapeReader = Data2Sql(tableName=layerName, schema=self.schema, encoding=self.encoding, file=shapeFileName + ".shp")
-            shapeReader.writeSqlFile(fileName=self.outputPath + layerName)
+            shapeReader.writeSqlFile(fileName=self.outputPath + layerName, columnsToLower=self.columnsToLower)
         if self.verbose:
             print("processo terminado!")
