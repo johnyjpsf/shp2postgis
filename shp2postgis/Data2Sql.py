@@ -1,5 +1,9 @@
 import shapefile
+
+## Módulo instalado
 from shp2postgis.Util import *
+
+## Local no projeto
 # from Util import *
 
 class Data2Sql:
@@ -60,7 +64,7 @@ class Data2Sql:
     "D": Dates.
     "M": Memo, has no meaning within a GIS and is part of the xbase spec instead.
     """
-    def getCreateTable(self):
+    def getCreateTable(self, columnsToLower=False):
         typeDict = {
             "C": "VARCHAR",
             "N": "NUMERIC",
@@ -72,18 +76,16 @@ class Data2Sql:
         sqlString = "CREATE TABLE \"{sch}\".\"{tab}\" (\"gid\" SERIAL, CONSTRAINT \"{tab}_pk\" PRIMARY KEY (\"gid\"));\n".format(sch=self.schema, tab=self.tableName)
         sqlString += "SELECT AddGeometryColumn(\'{sch}\',\'{tab}\',\'geom\',{srid},\'{typ}\',2);\n".format(sch=self.schema, tab=self.tableName, srid=self.getSrid(), typ=self.getGeomType())
         for field in self.getFields():
+            field_ = field
+            if columnsToLower:
+                field_ = field.lower()
+
             if field not in self.stripFields:
-                sqlString += "ALTER TABLE \"{sch}\".\"{tab}\" ADD COLUMN \"{col}\" {typ};\n".format(sch=self.schema, tab=self.tableName, col=field, typ=typeDict[self.getFields()[field]])
+                sqlString += "ALTER TABLE \"{sch}\".\"{tab}\" ADD COLUMN \"{col}\" {typ};\n".format(sch=self.schema, tab=self.tableName, col=field_, typ=typeDict[self.getFields()[field]])
         return sqlString
 
-    def makeInsert(self, record, geom):
+    def makeInsert(self, record, geom, columnsToLower=False):
         attributes = []
-        # if "WktShapeFileGeometry" in fea:
-        #     WktShapeFileGeometry = fea["WktShapeFileGeometry"]
-        #     del fea["WktShapeFileGeometry"]
-        # if "WktShapeFileGeometrySrid" in fea:
-        #     WktShapeFileGeometrySrid = fea["WktShapeFileGeometrySrid"]
-        #     del fea["WktShapeFileGeometrySrid"]
         if "gid" in record:
             del record["gid"]
         for attr in record:
@@ -100,7 +102,6 @@ class Data2Sql:
                         text = str(record[attr])
                         for key in self.replacedChars:
                             if key in text:
-
                                 text = text.replace(key, self.replacedChars[key])
                         text = "'" + text + "'"
                         if text == "''":
@@ -114,15 +115,17 @@ class Data2Sql:
         quotedFields = []
         for value in self.getFields().keys():
             if value not in self.stripFields:
+                if columnsToLower:
+                    value = value.lower()
                 quotedFields.append('"' + value + '"')
         fieldsString = ", ".join(quotedFields)
         return "INSERT INTO \"{schema}\".\"{tableName}\" ({fldStr}, \"geom\") VALUES ({val}, {geo});\n".format(schema=self.schema, tableName=self.tableName, fldStr=fieldsString, val=values, geo=geom)
 
-    def writeSqlFile(self, fileName):
-        listWriter(self.getDropTable(), self.getCreateTable(), fileName=fileName, fileExtension="sql",separator=None, mode='wt')
+    def writeSqlFile(self, fileName, columnsToLower=False):
+        listWriter(self.getDropTable(), self.getCreateTable(columnsToLower), fileName=fileName, fileExtension="sql",separator=None, mode='wt')
         with shapefile.Reader(self.file, encoding=self.encoding) as shp:
             for feature in shp.iterShapeRecords():
                 record = feature.record.as_dict().copy()
                 geom = self.translateShape(feature.shape)
-                insert = self.makeInsert(record, geom)
+                insert = self.makeInsert(record, geom, columnsToLower)
                 listWriter(insert, fileName=fileName, fileExtension="sql",separator=None, mode='at')
