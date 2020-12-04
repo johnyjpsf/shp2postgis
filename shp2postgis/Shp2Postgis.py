@@ -1,5 +1,8 @@
+## Módulo instalado
 from shp2postgis.Data2Sql import Data2Sql
 from shp2postgis.Util import *
+
+## Local no projeto
 # from Data2Sql import Data2Sql
 # from Util import *
 

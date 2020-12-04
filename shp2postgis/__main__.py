@@ -1,6 +1,10 @@
 import sys, getopt
+
+## Módulo instalado
 from shp2postgis.Util import *
 from shp2postgis.Shp2Postgis import Shp2Postgis
+
+## Local no projeto
 # from Util import *
 # from Shp2Postgis import Shp2Postgis
 
