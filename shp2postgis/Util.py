@@ -21,7 +21,7 @@ def listWriter(*args, fileName="file", fileExtension="txt", separator="-", comme
                 f.write(value)
             except Exception as e:
                 linha = ''
-                test_file = open("test_file_" + str(datetime.datetime.now()) + ".txt", "wt")
+                test_file = open("test_file.txt", "at")
                 for letra in value:
                     try:
                         test_file.write(letra)
@@ -32,7 +32,7 @@ def listWriter(*args, fileName="file", fileExtension="txt", separator="-", comme
                         linha += letra
                 test_file.close()
                 try:
-                    f.write(linha)
+                    f.write(linha + "\n")
                 except Exception as e:
                     raise e
             f.write(separationString)
