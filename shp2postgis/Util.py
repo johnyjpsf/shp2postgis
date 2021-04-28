@@ -1,11 +1,8 @@
 import datetime
 
 def getVersion():
-    return "0.2.7"
+    return "0.3.0"
 
-"""
-# *args: multiple arguments, writable things or lists of writable things
-"""
 def listWriter(*args, fileName="file", fileExtension="txt", separator="-", commentChar="--", mode='wt'):
     separationString = ""
     if separator != None and separator != "":
@@ -20,7 +17,24 @@ def listWriter(*args, fileName="file", fileExtension="txt", separator="-", comme
                 f.write(str(item))
                 f.write(str(separationString))
         else:
-            f.write(value)
+            try:
+                f.write(value)
+            except Exception as e:
+                linha = ''
+                test_file = open("test_file_" + str(datetime.datetime.now()) + ".txt", "wt")
+                for letra in value:
+                    try:
+                        test_file.write(letra)
+                    except Exception as e:
+                        print(e)
+                        # print("caracter com problema: " + letra)
+                    else:
+                        linha += letra
+                test_file.close()
+                try:
+                    f.write(linha)
+                except Exception as e:
+                    raise e
             f.write(separationString)
         index += 1
     f.close()
