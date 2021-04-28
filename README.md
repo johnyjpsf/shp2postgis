@@ -1,4 +1,4 @@
-# shp2posgis
+# shp2postgis
 
 > Módulo python para converter arquivos no padrão shapefile da esri para arquivos sql que podem ser importados em bancos de dados postgresql/postgis.
 

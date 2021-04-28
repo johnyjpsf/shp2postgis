@@ -12,7 +12,7 @@ setuptools.setup(
     description="shapefile to sql converter.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/johnyjpsf/shp2posgis",
+    url="https://github.com/johnyjpsf/shp2postgis",
     packages=setuptools.find_packages(),
     keywords='gis geospatial geographic shapefile shapefiles postgis postgre sql database',
     license='MIT',
@@ -34,7 +34,7 @@ setuptools.setup(
 # python3 setup.py sdist bdist_wheel
 
 # fazer upload
-# python3 -m twine upload --repository testpypi dist/*
+# python3 -m twine upload -u johnyjpsf -p meu_password --repository testpypi dist/*
 
 # desinstalar o pacote antigo
 # pip3 uninstall shp2postgis -y
