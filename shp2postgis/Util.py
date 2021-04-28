@@ -1,7 +1,7 @@
 import datetime
 
 def getVersion():
-    return "0.2.7.11"
+    return "0.2.7.16"
 
 def listWriter(*args, fileName="file", fileExtension="txt", separator="-", commentChar="--", mode='wt'):
     separationString = ""
@@ -17,18 +17,17 @@ def listWriter(*args, fileName="file", fileExtension="txt", separator="-", comme
                 f.write(str(item))
                 f.write(str(separationString))
         else:
-            try_number = 0
             try:
                 f.write(value)
             except Exception as e:
                 linha = ''
-                test_file = open("test_file_" + fileName + str(try_number) + ".txt", "wt")
+                test_file = open("test_file_" + str(datetime.datetime.now()) + ".txt", "wt")
                 for letra in value:
                     try:
                         test_file.write(letra)
                     except Exception as e:
                         print(e)
-                        print("caracter com problema: " + letra)
+                        # print("caracter com problema: " + letra)
                     else:
                         linha += letra
                 test_file.close()
@@ -36,7 +35,6 @@ def listWriter(*args, fileName="file", fileExtension="txt", separator="-", comme
                     f.write(linha)
                 except Exception as e:
                     raise e
-                try_number += 1
             f.write(separationString)
         index += 1
     f.close()

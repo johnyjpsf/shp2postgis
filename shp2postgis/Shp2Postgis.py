@@ -1,6 +1,7 @@
 ## Módulo instalado
 from shp2postgis.Data2Sql import Data2Sql
 from shp2postgis.Util import *
+import os
 
 ## Local no projeto
 # from Data2Sql import Data2Sql
@@ -10,13 +11,13 @@ class Shp2Postgis:
     """
     # dictInput: dictionary as {"layerName": "path/shapeFileName", ....}
     """
-    def __init__(self, dictInput, outputPath="./", schema="public", encoding="latin1", verbose=False, log=False, columnsToLower=False):
+    def __init__(self, dictInput, outputPath=".", schema="public", encoding="latin1", verbose=False, log=False, columnsToLower=False):
         self.dictInput = dictInput
         if outputPath == None:
-            self.outputPath = "./"
+            self.outputPath = "."
         else:
-            if outputPath[-1] != '/':
-                outputPath = outputPath + '/'
+            if not outputPath.endswith(os.sep):
+                outputPath = outputPath + os.sep
             self.outputPath = outputPath
         if schema == None:
             self.schema = "public"
