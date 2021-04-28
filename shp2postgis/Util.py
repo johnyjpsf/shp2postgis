@@ -1,7 +1,7 @@
 import datetime
 
 def getVersion():
-    return "0.3.0"
+    return "0.3.1"
 
 def listWriter(*args, fileName="file", fileExtension="txt", separator="-", commentChar="--", mode='wt'):
     separationString = ""
